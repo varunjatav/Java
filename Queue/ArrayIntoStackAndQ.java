@@ -4,60 +4,48 @@ public class ArrayIntoStackAndQ {
 
     public static void main(String[] args) {
 
-        int arr[] = new int[20];
+        int arr[] = new int[10];
         int stack[] = new int[arr.length];
         int Q[] = new int[arr.length];
         int Top = -1;
         int F = -1;
         int R = -1;
-        int c = 0, c1 = 0, c2 = 0;
-        int max = 0;
-        int min = 0;
+        int c = 0;
+        int max = -1;
+        int min = 999;
         int pos1 = -1;
         int pos2 = -1;
         Scanner Obj = new Scanner(System.in);
-        for (int i = 0; i < 20; i++) {
+        for (int i = 0; i < arr.length; i++) {
 
             System.out.println("Enter in Array " + i);
             arr[i] = Obj.nextInt();
         }
         Obj.close();
-        int i = 0;
-        while (i < arr.length) {
-            if (arr[i] % 2 == 0) {
-                min = arr[i];
-                c1 = 1;
-            } else if (arr[i] % 2 != 1) {
-                max = arr[i];
-                c2 = 1;
-            }
-            if (c1 == 1 && c2 == 1) {
-                break;
-            }
-        }
-
+        System.out.println("----------------------------------------------------------");
         while (c < arr.length) {
-            int j = 0;
-            while (j < arr.length) {
-                if (arr[j] % 2 == 0) {
-                    if (min > arr[j] && arr[j] >= 0) {
-                        min = arr[j];
-                        pos1 = j;
+            min = 999;
+            max = -1;
+
+            for (int i = 0; i < arr.length; i++) {
+                if (arr[i] % 2 == 0) {
+                    if (min > arr[i] && arr[i] < 999) {
+                        min = arr[i];
+                        pos1 = i;
                     }
-                } else if (arr[j] % 2 != 0) {
-                    if (max < arr[j] && arr[j] >= 0) {
-                        max = arr[j];
-                        pos2 = j;
+                } else if (arr[i] % 2 != 0) {
+                    if (max < arr[i] && arr[i] > -1 && arr[i] < 999) {
+                        max = arr[i];
+                        pos2 = i;
                     }
                 }
-                j++;
             }
-            if (min > 0) {
+            if (min != 999) {
                 Top++;
                 stack[Top] = min;
-                arr[pos1] = -1;
+                arr[pos1] = 999;
             }
-            if (max > 0) {
+            if (max != -1) {
                 if (F == -1) {
                     F = 0;
                 }
@@ -65,15 +53,16 @@ public class ArrayIntoStackAndQ {
                 Q[R] = max;
                 arr[pos2] = -1;
             }
+             c++;
         }
-
-        System.out.println("Stack");
-        for (int j = 0; j < stack.length; j++) {
-            System.out.println(stack[j]);
+        while(F < Q.length){
+            System.out.println("Q :" + Q[F]);
+            F++;
         }
-        System.out.println("Queue");
-        for (int j = 0; j < stack.length; j++) {
-            System.out.println(Q[j]);
+         while(Top >= 0){
+            System.out.println("Stack :" + stack[Top]);
+            Top--;
         }
     }
+
 }
