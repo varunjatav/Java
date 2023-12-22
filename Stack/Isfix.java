@@ -27,12 +27,28 @@ public class Isfix {
                     t++;
                     st[t] = arr[i];
                 } else if (t > -1) {
-                    if (arr[i] == '-' && st[t] == '*' || arr[i] == '*' && st[t] == '*' || arr[i] == '/' && st[t] == '/'
-                            || arr[i] == '*' && st[t] == '/' || arr[i] == '-' && st[t] == '/' || arr[i]== '+' && st[t] =='/') {
+                    if (arr[i] == '-' && st[t] == '-' || arr[i] == '-' && st[t] == '+' || arr[i] == '-' && st[t] == '*'
+                            || arr[i] == '-' && st[t] == '/' || arr[i] == '-' && st[t] == '^'
+                            || arr[i] == '-' && st[t] == '$' || arr[i] == '+' && st[t] == '-'
+                            || arr[i] == '+' && st[t] == '+' || arr[i] == '+' && st[t] == '*'
+                            || arr[i] == '+' && st[t] == '/' || arr[i] == '+' && st[t] == '^'
+                            || arr[i] == '+' && st[t] == '$' || arr[i] == '/' && st[t] == '/'
+                            || arr[i] == '/' && st[t] == '*' || arr[i] == '/' && st[t] == '^'
+                            || arr[i] == '/' && st[t] == '$' || arr[i] == '*' && st[t] == '*'
+                            || arr[i] == '*' && st[t] == '/' || arr[i] == '*' && st[t] == '^'
+                            || arr[i] == '*' && st[t] == '$') {
                         exp = st[t];
                         arr2[j] = exp;
                         j++;
                         st[t] = arr[i];
+                    }else if(arr[i] == ')') {
+                        if(t > -1){
+                            while(st[t] != '(') {
+                                arr2[j] = st[t];
+                                j++; 
+                                t--;
+                            }
+                        }
                     } else {
                         t++;
                         st[t] = arr[i];
