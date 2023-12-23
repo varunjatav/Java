@@ -41,14 +41,14 @@ public class Isfix {
                         arr2[j] = exp;
                         j++;
                         st[t] = arr[i];
-                    }else if(arr[i] == ')') {
-                        if(t > -1){
-                            while(st[t] != '(') {
-                                arr2[j] = st[t];
-                                j++; 
-                                t--;
-                            }
+                    } else if (arr[i] == ')') {
+                        while (st[t] != '(') {
+                            arr2[j] = st[t];
+                            j++;
+                            t--;
                         }
+                        t--;
+
                     } else {
                         t++;
                         st[t] = arr[i];
