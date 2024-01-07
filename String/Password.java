@@ -1,41 +1,65 @@
 import java.util.Scanner;
 
 class Password {
-    static char arr[] = new char[4];
-
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        String word = sc.nextLine();
-        Password obj = new Password();
-        obj.convertToArray(word);
-        obj.convertToString(arr, word);
-        sc.close();
+    static Password obj = new Password();
+  public static void main (String[] args) {
+    Scanner sc = new Scanner(System.in);
+    String word = sc.nextLine();
+    char arr[] = new char[word.length()];
+    char ch = 'a';
+    String newWord = "";
+    for(int i=0; i< arr.length; i++) {
+        arr[i] = word.charAt(i);
     }
-
-    public void convertToArray(String word) {
-        for (int i = 0; i < word.length(); i++) {
-            arr[i] = word.charAt(i);
-        }
-    }
-
-    public void convertToString(char arr[], String word) {
-        String str = "";
-        char ch = 'a';
-        while (str.compareTo(word) != 0) {
-            
-            int i = 0, j = 1;
-            while (j < arr.length) {
-                str = "";
-                ch = arr[i];
-                arr[i] = arr[j];
-                arr[j] = ch;
-                for (int k = 0; k < arr.length; k++) {
-                    str += arr[k];
-                }
-                System.out.println("str: " + str);
-                i++;
-                j++;
+    sc.close();
+   
+    for(int i=0; i<arr.length;i++){
+        newWord = "";
+        ch = arr[i];
+        newWord += ch;
+        for(int j=0; j<arr.length; j++){
+            if(ch == arr[j]){
+                continue;
+            }
+            else{
+                newWord += arr[j];
             }
         }
+        // System.out.println("newWord: " + newWord + " " + "Char" + ch);
+        obj.combinator(newWord,ch,arr);
     }
+  }
+  
+
+  public void combinator(String nw, char c, char[] arr){
+    String str = "";
+    char newCh = 'a';
+    // System.out.println("Str outer while : "+ str );
+    String combineStr = "";
+    if(combineStr != nw){
+        combineStr = obj.fun(str,newCh, arr,c);
+        System.out.println(combineStr);
+    }
+    
+  }
+
+
+  public String fun(String str, char newCh, char[] arr,char c){
+    for(int i = 0; i< arr.length - 1; i++){
+            if(arr[i] == c){
+                continue;
+            }
+            else{
+                newCh = arr[i];
+                arr[i] = arr[i+1];
+                arr[i+1] = newCh;
+                str="";
+                for(int j = 0; j < arr.length; j++){
+                    str += arr[j];
+                }
+                return str;
+            }
+        }
+    return str;
+  }
 }
